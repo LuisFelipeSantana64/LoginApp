@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgileBank - Login</title>
+    <style>
+        /* Estilo geral da página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Logo de fundo com baixa opacidade */
+        .background-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-25%, -25%);
+            width: 80%;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Logo pequena no canto superior esquerdo */
+        .small-logo {
+            position: fixed;
+            top: 20px;
+            left: 30px;
+            width: 60px;
+            z-index: 10;
+        }
+
+        /* Caixa central de login */
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            width: 300px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Título */
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Campos de entrada */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Botão de login */
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3b4cb8;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2c3e50;
+        }
+
+        /* Mensagem de erro */
+        .error {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Link para registro */
+        .register-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .register-link a {
+            color: #3b4cb8;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    {% set logo_path = 'imagem/8fb04f43-68ba-4621-b053-72c10abe48d4.png' %}
+
+    <!-- Logo pequena -->
+    <img src="{{ url_for('static', filename=logo_path) }}" alt="AgileBank Logo" class="small-logo">
+
+    <!-- Logo de fundo -->
+    <img src="{{ url_for('static', filename=logo_path) }}" alt="AgileBank Logo" class="background-logo">
+
+    <!-- Caixa de login -->
+    <div class="container">
+        <h2>Entrar na Conta</h2>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="/login">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+
+        <div class="register-link">
+            <p>Não tem conta? <a href="/register">Registrar</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
